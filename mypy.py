@@ -1,1 +1,1 @@
-print "Hello World from MyPy"
+print ("Hello World from MyPy")
