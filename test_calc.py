@@ -3,4 +3,4 @@ import calc
 class Testcalc(unittest.TestCase):
     def test_add(self):
 	    result = calc.add(3,4)
-		self.assetEquals(res,7)
+	    self.assetEquals(result,7)
