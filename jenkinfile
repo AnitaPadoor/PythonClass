@@ -1,10 +1,19 @@
 pipeline {
-    agent any
-    stages {
-        stage('Build'){
-            steps {
-                 echo "Stage1 -  Build" 
-            }
-        }
+  agent any
+  stages {
+    
+    stage('Check') {
+      steps {
+        bat  script: 'python -m pip install pytest'
+        bat  script: 'python -m pytest calc.py'
+        
+      }
     }
+    stage('Test') {
+      steps {
+        bat  script: 'python -m pip install pytest'
+        bat  script: 'python -m pytest test_calc.py'
+      }
+    }
+  }
 }
