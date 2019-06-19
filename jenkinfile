@@ -1,18 +1,31 @@
 pipeline {
   agent any
   stages {
-    
+    stage('Setup') {
+      steps {
+        bat  script: 'python -m pip install pytest'
+        bat  script: 'python -m pip install pylint'
+        bat  script: 'python -m pip install pytest-cov'
+      }
+    }
+stage('Parallel-stges') {
+       parallel{
     stage('Check') {
       steps {
-        bat  script: 'python -m pip install pylint'
-        bat  script: 'python -m pylint calc.py'
-        
+       bat  script: 'python -m pylint calc.py'
+        bat  script: 'python -m pylint test_calc.py'
       }
     }
     stage('Test') {
       steps {
-        bat  script: 'python -m pip install pytest'
         bat  script: 'python -m pytest test_calc.py'
+      }
+    }
+    }
+    } 
+ stage('Cov') {
+      steps {
+        bat  script: 'python -m pytest --cov=. test_calc.py'
       }
     }
   }
